@@ -4,6 +4,7 @@ Run this app to generate reports
 from eex.margin_checker import MarginChecker
 from eex.data import CI050, CC050
 
+
 def compare():
     # init comparison object
     reporting_date = '2020-05-12'

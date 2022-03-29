@@ -1,9 +1,9 @@
 """
-email: eex.error.reporting@gmail.com
-password: eex@1234
+email: eex_old.error.reporting@gmail.com
+password: eex_old@1234
 """
 import smtplib
-from eex.conf.config import conf
+from eex import conf
 from os.path import basename
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart

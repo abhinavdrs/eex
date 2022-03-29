@@ -1,0 +1,33 @@
+---
+# email details
+from_addr: "eex_old.error.reporting@gmail.com"
+password: "eex_old@1234"
+# emails to be notified in case of error
+to_addr:
+  - "abhinav.drs@gmail.com"
+
+# smtp server
+smtp_server: "smtp.gmail.com"
+smtp_server_port: 465
+
+# all margin_types to be included in reporting
+margin_type:
+  - 'SPAN'
+  - 'IMSM'
+  - 'CESM'
+  - 'AMPO'
+  - 'AMEM'
+  - 'AMCO'
+  - 'AMCU'
+  - 'AMWI'
+  - 'DMEM'
+
+# report names
+cc_with_sod_ci: "cc_with_sod_ci"
+cc_with_eod_ci: "cc_with_eod_ci"
+ci_eod_with_sod: "ci_eod_with_sod"
+
+
+
+
+
