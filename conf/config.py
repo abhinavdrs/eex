@@ -4,6 +4,9 @@ Loads config.yaml
 import yaml
 
 class Configuration:
+    """
+    loads configuration
+    """
 
     def __init__(self, conf_yaml):
         self.conf_dict = self.load_config(conf_yaml)
@@ -19,6 +22,11 @@ class Configuration:
 
 
     def load_config(self, conf_yaml):
+        """
+
+        :param conf_yaml: Name of config yaml file
+        :return: None
+        """
         stream = open(conf_yaml, 'r')
         return yaml.safe_load(stream)
 

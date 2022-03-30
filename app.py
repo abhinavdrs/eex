@@ -6,10 +6,17 @@ from eex.data import CI050, CC050
 
 
 def compare():
-    # init comparison object
+    """
+    Initialize a margin_checker object to generate and send report via email.
+
+    :return: None
+    """
+    # init margin_checker object
     reporting_date = '2020-05-12'
     compare_obj = MarginChecker(reporting_date, CC050, CI050)
-    write_report = compare_obj.write_assessed_report_to_csv()
+
+    # generate individual reports to .csv
+    compare_obj.write_assessed_report_to_csv()
 
 if __name__ == "__main__":
     compare()
