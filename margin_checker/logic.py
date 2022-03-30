@@ -197,58 +197,63 @@ class MarginChecker:
             print("len(report['missing'][0])", len(report['missing'][0]))
             # entries present in 1 but not in 2
             missing_in_1 = [lists[0][entry] for entry in report['missing'][0]]
-            missing_in_1_accounts = [entry[-2] for entry in missing_in_1]
-            # write to logger
-            [self.logger.error(f"Missing:entry:{entry} from {name1} is not found in {name2}") for entry in missing_in_1]
-            [self.logger.error(f"Missing Margin Type:margin type:{account} from {name1} is not found in {name2}") for account in missing_in_1_accounts]
+            if missing_in_1:
+                missing_in_1_accounts = [entry[-2] for entry in missing_in_1]
+                # write to logger
+                [self.logger.error(f"Missing:entry:{entry} from {name1} is not found in {name2}") for entry in missing_in_1]
+                [self.logger.error(f"Missing Margin Type:margin type:{account} from {name1} is not found in {name2}") for account in missing_in_1_accounts]
 
-            conflict_1_2_tuples = report['conflict'][0]
-            print(f'conflict_{name1}_{name2} for key {key}', conflict_1_2_tuples)
-            conflict_1_2_values = []
-            conflict_1_2_account = []
+                conflict_1_2_tuples = report['conflict'][0]
+                print(f'conflict_{name1}_{name2} for key {key}', conflict_1_2_tuples)
+                conflict_1_2_values = []
+                conflict_1_2_account = []
 
-            if len(conflict_1_2_tuples):
-                conflict_1_2_values = [(lists[0][entry[0]], lists[1][entry[1]])
-                                       for entry in conflict_1_2_tuples]
+                if len(conflict_1_2_tuples):
+                    conflict_1_2_values = [(lists[0][entry[0]], lists[1][entry[1]])
+                                           for entry in conflict_1_2_tuples]
 
-                [self.logger.error(f"Conflicted_entry:{entry[0]} of {name1} is conflicted with entry:{entry[1]} of "
-                                   f"{name2}") for entry in conflict_1_2_values]
+                    [self.logger.error(f"Conflicted_entry:{entry[0]} of {name1} is conflicted with entry:{entry[1]} of "
+                                       f"{name2}") for entry in conflict_1_2_values]
 
-                conflict_1_2_account = [(entry[0][-2], entry[0][-1], entry[1][-1])
-                                        for entry in conflict_1_2_values]
-                [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type:{entry[0]} is {entry[1]} in {name1}"
-                                   f" but is {entry[2]} in {name2}")
-                 for entry in conflict_1_2_account]
+                    conflict_1_2_account = [(entry[0][-2], entry[0][-1], entry[1][-1])
+                                            for entry in conflict_1_2_values]
+                    [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type:{entry[0]} is {entry[1]} in {name1}"
+                                       f" but is {entry[2]} in {name2}")
+                     for entry in conflict_1_2_account]
+            else:
+                self.logger.info(f"All entries from {name1} are present in {name2}")
 
             # entries present in 2 but not in 1
             missing_in_2 = [lists[1][entry] for entry in report['missing'][1]]
-            missing_in_2_accounts = [entry[-2] for entry in missing_in_2]
-            [self.logger.error(f"Missing:entry:{entry} from {name2} is not found in {name1}") for entry in missing_in_2]
-            print(f'missing_in_{name2} for key {key}', missing_in_2)
-            print(f'missing_in_{name2}_accounts for key {key}', missing_in_2_accounts)
-            [self.logger.error(f"Missing Margin Type:margin type:{account} from {name2} is not found in {name1}") for account in
-             missing_in_2_accounts]
+            if missing_in_2:
+                missing_in_2_accounts = [entry[-2] for entry in missing_in_2]
+                [self.logger.error(f"Missing:entry:{entry} from {name2} is not found in {name1}") for entry in missing_in_2]
+                print(f'missing_in_{name2} for key {key}', missing_in_2)
+                print(f'missing_in_{name2}_accounts for key {key}', missing_in_2_accounts)
+                [self.logger.error(f"Missing Margin Type:margin type:{account} from {name2} is not found in {name1}") for account in
+                 missing_in_2_accounts]
 
+                # conflicted entries of 2 with 1
+                conflict_2_1_tuples = report['conflict'][1]
+                print(f'conflict_{name2}_{name1} for key {key}', conflict_2_1_tuples)
+                conflict_2_1_values = []
+                conflict_2_1_account = []
+                if len(conflict_2_1_tuples):
+                    conflict_2_1_values = [(lists[1][entry[0]], lists[0][entry[1]])
+                                           for entry in conflict_2_1_tuples]
+                    [self.logger.error(f"Conflicted_entry:{entry[0]} of {name2} is conflicted with entry:{entry[1]} of"
+                                       f" {name1}")
+                     for entry in conflict_2_1_values]
+                    conflict_2_1_account = [(entry[0][-2], entry[0][-1], entry[1][-1])
+                                            for entry in conflict_2_1_values]
+                    [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type {entry[0]} is {entry[1]} in {name2}"
+                                       f" but is {entry[2]} in {name1}")
+                     for entry in conflict_1_2_account]
+                    print(f'conflict_{name2}_{name1}_values for key {key}', conflict_2_1_values)
+                    print(f'conflict_{name2}_{name1}_accounts for key {key}', conflict_2_1_account)
 
-
-            # conflicted entries of 2 with 1
-            conflict_2_1_tuples = report['conflict'][1]
-            print(f'conflict_{name2}_{name1} for key {key}', conflict_2_1_tuples)
-            conflict_2_1_values = []
-            conflict_2_1_account = []
-            if len(conflict_2_1_tuples):
-                conflict_2_1_values = [(lists[1][entry[0]], lists[0][entry[1]])
-                                       for entry in conflict_2_1_tuples]
-                [self.logger.error(f"Conflicted_entry:{entry[0]} of {name2} is conflicted with entry:{entry[1]} of"
-                                   f" {name1}")
-                 for entry in conflict_2_1_values]
-                conflict_2_1_account = [(entry[0][-2], entry[0][-1], entry[1][-1])
-                                        for entry in conflict_2_1_values]
-                [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type {entry[0]} is {entry[1]} in {name2}"
-                                   f" but is {entry[2]} in {name1}")
-                 for entry in conflict_1_2_account]
-                print(f'conflict_{name2}_{name1}_values for key {key}', conflict_2_1_values)
-                print(f'conflict_{name2}_{name1}_accounts for key {key}', conflict_2_1_account)
+            else:
+                self.logger.info(f"All entries from {name2} are present in {name1}")
 
             entry_report = {f"Accounts_in_{name1}_missing_From_{name2}": missing_in_1_accounts,
                             f"Entries_in_{name1}_missing_from_{name2}": missing_in_1,
