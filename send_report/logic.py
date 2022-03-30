@@ -9,8 +9,6 @@ from email.mime.application import MIMEApplication
 from conf.config import conf
 
 
-
-
 class EmailReport():
     """
     Initialize object to send error report to a configurable list of recipients.
@@ -31,8 +29,8 @@ class EmailReport():
         :return: None
         """
 
-        subject = "Error Report"
-        content = 'Please find attached the error report'
+        subject = "Margin Report"
+        content = 'Please find attached the margin report'
 
         msg = MIMEMultipart()
         msg['From'] = conf.from_addr
