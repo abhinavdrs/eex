@@ -16,7 +16,7 @@ A simple python application to compare lists of lists and compare a subset of th
     1) The margin_types are configurable and can be added/removed from config.yaml
     2) MarginChecker function write_assessed_report_to_csv() can be used to write local .csv file of three reports.
     3) All generated reports can be found in the current working directory.
-    
+    4) Sample report generated using sample data are provided in sample_report directory.
  ### Two types of sample data.
  1) data.py : Simulate error scenario by changing following in app.py:
  
