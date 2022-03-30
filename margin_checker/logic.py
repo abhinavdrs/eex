@@ -26,7 +26,9 @@ class MarginChecker:
         self.eod_ci_entries = self.find_eod_ci_entries()
         self.report = self.generate_reports()
         self.assessed_report = self.assess_report()
-        EmailReport(self.report_file)
+        #TODO
+        # uncomment in final version
+        # EmailReport(self.report_file)
 
 
 
