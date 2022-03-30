@@ -1,7 +1,7 @@
 """
 Run this app to generate reports
 """
-from eex.margin_checker import MarginChecker
+from eex.margin_checker.logic import MarginChecker
 from eex.data import CI050, CC050
 
 

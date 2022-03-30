@@ -1,7 +1,7 @@
 ---
 # email details
-from_addr: "eex_old.error.reporting@gmail.com"
-password: "eex_old@1234"
+from_addr: "eex.error.reporting@gmail.com"
+password: "eex@1234"
 # emails to be notified in case of error
 to_addr:
   - "abhinav.drs@gmail.com"

@@ -3,7 +3,7 @@ from datetime import timedelta
 import logging
 import pandas as pd
 from eex.conf.config import conf
-
+from eex.send_report.logic import EmailReport
 
 class MarginChecker:
     """
@@ -26,7 +26,7 @@ class MarginChecker:
         self.eod_ci_entries = self.find_eod_ci_entries()
         self.report = self.generate_reports()
         self.assessed_report = self.assess_report()
-        # EmailReport(self.report_file)
+        EmailReport(self.report_file)
 
 
 

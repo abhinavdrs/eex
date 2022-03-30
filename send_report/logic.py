@@ -3,7 +3,7 @@ email: eex_old.error.reporting@gmail.com
 password: eex_old@1234
 """
 import smtplib
-from eex import conf
+from eex.conf.config import conf
 from os.path import basename
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
