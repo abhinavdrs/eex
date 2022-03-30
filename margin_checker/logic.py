@@ -189,7 +189,7 @@ class MarginChecker:
             name1 = key_to_name_map[key]['name1']
             name2 = key_to_name_map[key]['name2']
             lists = key_to_name_map[key]['lists']
-            self.logger.info("\nComparing {name1} with {name2}...\n")
+            self.logger.info(f"\nComparing {name1} with {name2}...\n")
 
             print(f"testing dict logic name1: {name1}, name2:{name2}, lists:{lists}")
             report = self.report[f'report_{self.reporting_date}'][key]
@@ -197,6 +197,9 @@ class MarginChecker:
             print("len(report['missing'][0])", len(report['missing'][0]))
             # entries present in 1 but not in 2
             missing_in_1 = [lists[0][entry] for entry in report['missing'][0]]
+            missing_in_1_accounts = []
+            conflict_1_2_values = []
+            conflict_1_2_account = []
             if missing_in_1:
                 missing_in_1_accounts = [entry[-2] for entry in missing_in_1]
                 # write to logger
@@ -205,8 +208,6 @@ class MarginChecker:
 
                 conflict_1_2_tuples = report['conflict'][0]
                 print(f'conflict_{name1}_{name2} for key {key}', conflict_1_2_tuples)
-                conflict_1_2_values = []
-                conflict_1_2_account = []
 
                 if len(conflict_1_2_tuples):
                     conflict_1_2_values = [(lists[0][entry[0]], lists[1][entry[1]])
@@ -225,6 +226,9 @@ class MarginChecker:
 
             # entries present in 2 but not in 1
             missing_in_2 = [lists[1][entry] for entry in report['missing'][1]]
+            missing_in_2_accounts = []
+            conflict_2_1_values = []
+            conflict_2_1_account = []
             if missing_in_2:
                 missing_in_2_accounts = [entry[-2] for entry in missing_in_2]
                 [self.logger.error(f"Missing:entry:{entry} from {name2} is not found in {name1}") for entry in missing_in_2]
@@ -236,8 +240,7 @@ class MarginChecker:
                 # conflicted entries of 2 with 1
                 conflict_2_1_tuples = report['conflict'][1]
                 print(f'conflict_{name2}_{name1} for key {key}', conflict_2_1_tuples)
-                conflict_2_1_values = []
-                conflict_2_1_account = []
+
                 if len(conflict_2_1_tuples):
                     conflict_2_1_values = [(lists[1][entry[0]], lists[0][entry[1]])
                                            for entry in conflict_2_1_tuples]
@@ -287,6 +290,7 @@ class MarginChecker:
     def compare_two_lol(self, lol_1, name1, lol_2, name2):
         """
         The function compares two input LOL. The function does not assume the LOL to be of same length.
+        The returned dict contains all findings neccessary for reporting.
         The returned dict contains all findings neccessary for reporting.
 
         :param lol_1: List of Lists of input report 1.
