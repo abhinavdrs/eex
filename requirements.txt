@@ -1,5 +1,4 @@
 PyYAML
 datetime
-logging
 pandas
 smtplib
