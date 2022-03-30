@@ -1,9 +1,9 @@
 """
 Run this app to generate reports
 """
-from eex.margin_checker.logic import MarginChecker
-from eex.data import CI050, CC050
 
+from margin_checker.logic import MarginChecker
+from data import CI050, CC050
 
 def compare():
     """

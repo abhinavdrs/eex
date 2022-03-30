@@ -2,8 +2,8 @@ import datetime
 from datetime import timedelta
 import logging
 import pandas as pd
-from eex.conf.config import conf
-from eex.send_report.logic import EmailReport
+from conf.config import conf
+from send_report.logic import EmailReport
 
 class MarginChecker:
     """
