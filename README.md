@@ -23,7 +23,8 @@ A simple python application to compare lists of lists and compare a subset of th
     $ from data import CI050, CC050
  
  2) data_clean.py : Simulate no error scenario by changing following in app.py:
-    $ $ from data_clean import CI050, CC050
+ 
+    $ from data_clean import CI050, CC050
  
 
 
