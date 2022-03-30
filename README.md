@@ -1,5 +1,5 @@
 ### Margin Checker
-A simple python application to coompare lists of lists and compare a subset of their elments.
+A simple python application to compare lists of lists and compare a subset of their elements.
 
 ### Instructions for running with sample data:
 1) Clone repository in your favourite IDE
