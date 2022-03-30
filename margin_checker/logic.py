@@ -101,7 +101,6 @@ class MarginChecker:
 
         for i, value in enumerate(list):
             in_list = set(value[0])
-            print(f"in_list:{in_list}, value[0] {value[0]}, value[1]{value[1]}")
             closest_entry = [entry for entry in LOL if len(in_list - set(entry)) == 1]
             for entry in closest_entry:
                 diff_set = set(in_list) - set(entry)
@@ -109,9 +108,7 @@ class MarginChecker:
                 if is_float:
                     index_closes_entry = LOL.index(entry)
                     conflict_map.append((value[1], index_closes_entry))
-                    print(f"conflicted entry for list:{name1}:{value} is {name2}{entry}")
 
-        # print(conflict_map)
         return conflict_map
 
     def cc_with_sod_ci(self):
@@ -166,7 +163,7 @@ class MarginChecker:
         :return: A dictionary of assessed records.
         """
         assessed_report = {}
-        print(f"analyzing: {self.report[f'report_{self.reporting_date}']}")
+        # print(f"analyzing: {self.report[f'report_{self.reporting_date}']}")
         # compare CC_wth_SOD
         report_keys = self.report[f'report_{self.reporting_date}'].keys()
 
@@ -184,17 +181,13 @@ class MarginChecker:
                            }
 
         for key in report_keys:
-            print(f'key:{key} in report_keys:{report_keys}')
-
             name1 = key_to_name_map[key]['name1']
             name2 = key_to_name_map[key]['name2']
             lists = key_to_name_map[key]['lists']
             self.logger.info(f"\nComparing {name1} with {name2}...\n")
 
-            print(f"testing dict logic name1: {name1}, name2:{name2}, lists:{lists}")
             report = self.report[f'report_{self.reporting_date}'][key]
 
-            print("len(report['missing'][0])", len(report['missing'][0]))
             # entries present in 1 but not in 2
             missing_in_1 = [lists[0][entry] for entry in report['missing'][0]]
             missing_in_1_accounts = []
@@ -207,7 +200,6 @@ class MarginChecker:
                 [self.logger.error(f"Missing Margin Type:margin type:{account} from {name1} is not found in {name2}") for account in missing_in_1_accounts]
 
                 conflict_1_2_tuples = report['conflict'][0]
-                print(f'conflict_{name1}_{name2} for key {key}', conflict_1_2_tuples)
 
                 if len(conflict_1_2_tuples):
                     conflict_1_2_values = [(lists[0][entry[0]], lists[1][entry[1]])
@@ -232,14 +224,11 @@ class MarginChecker:
             if missing_in_2:
                 missing_in_2_accounts = [entry[-2] for entry in missing_in_2]
                 [self.logger.error(f"Missing:entry:{entry} from {name2} is not found in {name1}") for entry in missing_in_2]
-                print(f'missing_in_{name2} for key {key}', missing_in_2)
-                print(f'missing_in_{name2}_accounts for key {key}', missing_in_2_accounts)
                 [self.logger.error(f"Missing Margin Type:margin type:{account} from {name2} is not found in {name1}") for account in
                  missing_in_2_accounts]
 
                 # conflicted entries of 2 with 1
                 conflict_2_1_tuples = report['conflict'][1]
-                print(f'conflict_{name2}_{name1} for key {key}', conflict_2_1_tuples)
 
                 if len(conflict_2_1_tuples):
                     conflict_2_1_values = [(lists[1][entry[0]], lists[0][entry[1]])
@@ -252,8 +241,6 @@ class MarginChecker:
                     [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type {entry[0]} is {entry[1]} in {name2}"
                                        f" but is {entry[2]} in {name1}")
                      for entry in conflict_1_2_account]
-                    print(f'conflict_{name2}_{name1}_values for key {key}', conflict_2_1_values)
-                    print(f'conflict_{name2}_{name1}_accounts for key {key}', conflict_2_1_account)
 
             else:
                 self.logger.info(f"All entries from {name2} are present in {name1}")
@@ -364,7 +351,8 @@ class MarginChecker:
         try:
             float(value)
         except Exception as exc:
-            print(f"Exception {exc} in is_float")
+            pass
+            # print(f"Exception {exc} in is_float")
         else:
             is_float = True
 
