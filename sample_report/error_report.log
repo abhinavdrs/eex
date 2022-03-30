@@ -1,0 +1,54 @@
+INFO:margin_checker.logic:
+Comparing CC050 with CI050_sod...
+
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', 'Bank 2', 'A1', 'SPAN', 8766.4] from CC050 is not found in CI050_sod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:SPAN from CC050 is not found in CI050_sod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', 'Bank 2', 'A1', 'SPAN', 8766.4] of CC050 is conflicted with entry:['2020-05-12', '08:00:00', 'Bank 2', 'A1', 'SPAN', 821.4] of CI050_sod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type:SPAN is 8766.4 in CC050 but is 821.4 in CI050_sod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-12', '08:00:00', 'Bank 2', 'A1', 'IMSM', 8766.4] from CI050_sod is not found in CC050
+ERROR:margin_checker.logic:Missing Margin Type:margin type:IMSM from CI050_sod is not found in CC050
+INFO:margin_checker.logic:
+Comparing CC050 with CI050_eod...
+
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', 'Bank 2', 'A1', 'SPAN', 8766.4] from CC050 is not found in CI050_eod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', 'Bank 1', 'A2', 'IMSM', 76687.9] from CC050 is not found in CI050_eod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', 'Bank 1', 'A2', 'SPAN', 8963.3] from CC050 is not found in CI050_eod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:SPAN from CC050 is not found in CI050_eod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:IMSM from CC050 is not found in CI050_eod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:SPAN from CC050 is not found in CI050_eod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', 'Bank 2', 'A1', 'SPAN', 8766.4] of CC050 is conflicted with entry:['2020-05-11', '19:00:00', 'Bank 2', 'A1', 'SPAN', 821.4] of CI050_eod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', 'Bank 1', 'A2', 'IMSM', 76687.9] of CC050 is conflicted with entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.8] of CI050_eod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', 'Bank 1', 'A2', 'SPAN', 8963.3] of CC050 is conflicted with entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.4] of CI050_eod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type:SPAN is 8766.4 in CC050 but is 821.4 in CI050_eod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type:IMSM is 76687.9 in CC050 but is 76687.8 in CI050_eod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type:SPAN is 8963.3 in CC050 but is 8963.4 in CI050_eod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', '19:00:00', 'Bank 2', 'A1', 'IMSM', 8766.4] from CI050_eod is not found in CC050
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.4] from CI050_eod is not found in CC050
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.8] from CI050_eod is not found in CC050
+ERROR:margin_checker.logic:Missing Margin Type:margin type:IMSM from CI050_eod is not found in CC050
+ERROR:margin_checker.logic:Missing Margin Type:margin type:SPAN from CI050_eod is not found in CC050
+ERROR:margin_checker.logic:Missing Margin Type:margin type:IMSM from CI050_eod is not found in CC050
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.4] of CI050_eod is conflicted with entry:['2020-05-11', 'Bank 1', 'A2', 'SPAN', 8963.3] of CC050
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.8] of CI050_eod is conflicted with entry:['2020-05-11', 'Bank 1', 'A2', 'IMSM', 76687.9] of CC050
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type SPAN is 8766.4 in CI050_eod but is 821.4 in CC050
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type IMSM is 76687.9 in CI050_eod but is 76687.8 in CC050
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type SPAN is 8963.3 in CI050_eod but is 8963.4 in CC050
+INFO:margin_checker.logic:
+Comparing CI050_eod with CI050_sod...
+
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.4] from CI050_eod is not found in CI050_sod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.8] from CI050_eod is not found in CI050_sod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:SPAN from CI050_eod is not found in CI050_sod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:IMSM from CI050_eod is not found in CI050_sod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.4] of CI050_eod is conflicted with entry:['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'SPAN', 8963.3] of CI050_sod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.8] of CI050_eod is conflicted with entry:['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'IMSM', 76687.9] of CI050_sod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type:SPAN is 8963.4 in CI050_eod but is 8963.3 in CI050_sod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type:IMSM is 76687.8 in CI050_eod but is 76687.9 in CI050_sod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'IMSM', 76687.9] from CI050_sod is not found in CI050_eod
+ERROR:margin_checker.logic:Missing:entry:['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'SPAN', 8963.3] from CI050_sod is not found in CI050_eod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:IMSM from CI050_sod is not found in CI050_eod
+ERROR:margin_checker.logic:Missing Margin Type:margin type:SPAN from CI050_sod is not found in CI050_eod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'IMSM', 76687.9] of CI050_sod is conflicted with entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.8] of CI050_eod
+ERROR:margin_checker.logic:Conflicted_entry:['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'SPAN', 8963.3] of CI050_sod is conflicted with entry:['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.4] of CI050_eod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type SPAN is 8963.4 in CI050_sod but is 8963.3 in CI050_eod
+ERROR:margin_checker.logic:Conflicted Margin Type:Recorded margin for margin type IMSM is 76687.8 in CI050_sod but is 76687.9 in CI050_eod

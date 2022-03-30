@@ -1,0 +1,15 @@
+INFO:margin_checker.logic:
+Comparing CC050 with CI050_sod...
+
+INFO:margin_checker.logic:All entries from CC050 are present in CI050_sod
+INFO:margin_checker.logic:All entries from CI050_sod are present in CC050
+INFO:margin_checker.logic:
+Comparing CC050 with CI050_eod...
+
+INFO:margin_checker.logic:All entries from CC050 are present in CI050_eod
+INFO:margin_checker.logic:All entries from CI050_eod are present in CC050
+INFO:margin_checker.logic:
+Comparing CI050_eod with CI050_sod...
+
+INFO:margin_checker.logic:All entries from CI050_eod are present in CI050_sod
+INFO:margin_checker.logic:All entries from CI050_sod are present in CI050_eod
