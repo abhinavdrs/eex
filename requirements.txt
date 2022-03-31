@@ -2,3 +2,5 @@ PyYAML
 datetime
 pandas
 smtplib
+pytest
+mock
