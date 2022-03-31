@@ -5,6 +5,7 @@ import pandas as pd
 from conf.config import conf
 from send_report.logic import EmailReport
 
+
 class MarginChecker:
     """
     comapares input CC an CI reports for a given date.
@@ -17,15 +18,14 @@ class MarginChecker:
         :param ci050:
         """
         self.reporting_date = self.parse_date(date)
-        self.previous_date = self.reporting_date - timedelta(days=1)
         self.logger = self.initialize_logger()
+        self.previous_date = self.reporting_date - timedelta(days=1)
         self.ci050 = ci050
         self.cc050 = cc050
         self.cc_entries = self.find_yesterday_cc_entries()
         self.sod_ci_entries = self.find_sod_ci_entries()
         self.eod_ci_entries = self.find_eod_ci_entries()
         self.report = self.generate_reports()
-        self.assessed_report = self.assess_report()
         #TODO
         # uncomment in final version
         # EmailReport(self.report_file)
@@ -41,13 +41,13 @@ class MarginChecker:
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.INFO)
 
-        formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-
-        self.report_file = f"report_{self.reporting_date}_{datetime.datetime.now().time()}.log"
-        logfile_handler = logging.FileHandler(self.report_file)
-        logfile_handler.setFormatter(formatter)
-
-        logger.addHandler(logfile_handler)
+        # formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+        #
+        # self.report_file = f"report_{self.reporting_date}_{datetime.datetime.now().time()}.log"
+        # logfile_handler = logging.FileHandler(self.report_file)
+        # logfile_handler.setFormatter(formatter)
+        #
+        # logger.addHandler(logfile_handler)
 
         return logger
 
@@ -60,6 +60,7 @@ class MarginChecker:
         for entry in self.cc050:
             if entry[0] == str(self.previous_date) and entry[3] in conf.margin_type_list:
                 cc_entries.append(entry)
+
         return cc_entries
 
     def find_sod_ci_entries(self):
@@ -153,8 +154,6 @@ class MarginChecker:
         report_dict.update(self.cc_with_eod_ci())
         report_dict.update(self.ci_eod_with_sod())
 
-        self.report = {f"report_{self.reporting_date}": report_dict}
-
         return {f"report_{self.reporting_date}": report_dict}
 
     def assess_report(self):
@@ -162,8 +161,16 @@ class MarginChecker:
 
         :return: A dictionary of assessed records.
         """
+        #initialize logger
+        formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+
+        self.report_file = f"report_{self.reporting_date}_{datetime.datetime.now().time()}.log"
+        logfile_handler = logging.FileHandler(self.report_file)
+        logfile_handler.setFormatter(formatter)
+
+        self.logger.addHandler(logfile_handler)
         assessed_report = {}
-        # print(f"analyzing: {self.report[f'report_{self.reporting_date}']}")
+
         # compare CC_wth_SOD
         report_keys = self.report[f'report_{self.reporting_date}'].keys()
 
@@ -254,7 +261,7 @@ class MarginChecker:
                             }
             assessed_report[key] = entry_report
 
-        # self.assessed_report = assessed_report
+        self.assessed_report = assessed_report
         return assessed_report
 
     def write_assessed_report_to_csv(self):
