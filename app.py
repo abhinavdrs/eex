@@ -14,6 +14,7 @@ def compare():
     # init margin_checker object
     reporting_date = '2020-05-12'
     compare_obj = MarginChecker(reporting_date, CC050, CI050)
+    compare_obj.assess_report()
 
     # generate individual reports to .csv
     compare_obj.write_assessed_report_to_csv()
