@@ -10,6 +10,7 @@ class MarginChecker:
     """
     comapares input CC an CI reports for a given date.
     """
+
     def __init__(self, date, cc050, ci050):
         """
 
@@ -26,12 +27,6 @@ class MarginChecker:
         self.sod_ci_entries = self.find_sod_ci_entries()
         self.eod_ci_entries = self.find_eod_ci_entries()
         self.report = self.generate_reports()
-        #TODO
-        # uncomment in final version
-        # EmailReport(self.report_file)
-
-
-
 
     def initialize_logger(self):
         """
@@ -50,6 +45,9 @@ class MarginChecker:
         # logger.addHandler(logfile_handler)
 
         return logger
+
+    def send_report_by_email(self):
+        EmailReport(self.report_file)
 
     def find_yesterday_cc_entries(self):
         """
@@ -161,7 +159,7 @@ class MarginChecker:
 
         :return: A dictionary of assessed records.
         """
-        #initialize logger
+        # initialize logger
         formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
 
         self.report_file = f"report_{self.reporting_date}_{datetime.datetime.now().time()}.log"
@@ -175,17 +173,17 @@ class MarginChecker:
         report_keys = self.report[f'report_{self.reporting_date}'].keys()
 
         key_to_name_map = {
-                           'cc_with_sod_ci':{'name1':'CC050',
-                                             'name2':'CI050_sod',
-                                             'lists':[self.cc_entries, self.sod_ci_entries]
-                                             },
-                           'cc_with_eod_ci':{'name1':'CC050',
-                                             'name2':'CI050_eod',
-                                             'lists':[self.cc_entries, self.eod_ci_entries]},
-                           'ci_eod_with_sod':{'name1':'CI050_eod',
-                                             'name2':'CI050_sod',
-                                             'lists':[self.eod_ci_entries, self.sod_ci_entries]}
-                           }
+            'cc_with_sod_ci': {'name1': 'CC050',
+                               'name2': 'CI050_sod',
+                               'lists': [self.cc_entries, self.sod_ci_entries]
+                               },
+            'cc_with_eod_ci': {'name1': 'CC050',
+                               'name2': 'CI050_eod',
+                               'lists': [self.cc_entries, self.eod_ci_entries]},
+            'ci_eod_with_sod': {'name1': 'CI050_eod',
+                                'name2': 'CI050_sod',
+                                'lists': [self.eod_ci_entries, self.sod_ci_entries]}
+        }
 
         for key in report_keys:
             name1 = key_to_name_map[key]['name1']
@@ -203,8 +201,10 @@ class MarginChecker:
             if missing_in_1:
                 missing_in_1_accounts = [entry[-2] for entry in missing_in_1]
                 # write to logger
-                [self.logger.error(f"Missing:entry:{entry} from {name1} is not found in {name2}") for entry in missing_in_1]
-                [self.logger.error(f"Missing Margin Type:margin type:{account} from {name1} is not found in {name2}") for account in missing_in_1_accounts]
+                [self.logger.error(f"Missing:entry:{entry} from {name1} is not found in {name2}") for entry in
+                 missing_in_1]
+                [self.logger.error(f"Missing Margin Type:margin type:{account} from {name1} is not found in {name2}")
+                 for account in missing_in_1_accounts]
 
                 conflict_1_2_tuples = report['conflict'][0]
 
@@ -217,8 +217,9 @@ class MarginChecker:
 
                     conflict_1_2_account = [(entry[0][-2], entry[0][-1], entry[1][-1])
                                             for entry in conflict_1_2_values]
-                    [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type:{entry[0]} is {entry[1]} in {name1}"
-                                       f" but is {entry[2]} in {name2}")
+                    [self.logger.error(
+                        f"Conflicted Margin Type:Recorded margin for margin type:{entry[0]} is {entry[1]} in {name1}"
+                        f" but is {entry[2]} in {name2}")
                      for entry in conflict_1_2_account]
             else:
                 self.logger.info(f"All entries from {name1} are present in {name2}")
@@ -230,8 +231,10 @@ class MarginChecker:
             conflict_2_1_account = []
             if missing_in_2:
                 missing_in_2_accounts = [entry[-2] for entry in missing_in_2]
-                [self.logger.error(f"Missing:entry:{entry} from {name2} is not found in {name1}") for entry in missing_in_2]
-                [self.logger.error(f"Missing Margin Type:margin type:{account} from {name2} is not found in {name1}") for account in
+                [self.logger.error(f"Missing:entry:{entry} from {name2} is not found in {name1}") for entry in
+                 missing_in_2]
+                [self.logger.error(f"Missing Margin Type:margin type:{account} from {name2} is not found in {name1}")
+                 for account in
                  missing_in_2_accounts]
 
                 # conflicted entries of 2 with 1
@@ -245,8 +248,9 @@ class MarginChecker:
                      for entry in conflict_2_1_values]
                     conflict_2_1_account = [(entry[0][-2], entry[0][-1], entry[1][-1])
                                             for entry in conflict_2_1_values]
-                    [self.logger.error(f"Conflicted Margin Type:Recorded margin for margin type {entry[0]} is {entry[1]} in {name2}"
-                                       f" but is {entry[2]} in {name1}")
+                    [self.logger.error(
+                        f"Conflicted Margin Type:Recorded margin for margin type {entry[0]} is {entry[1]} in {name2}"
+                        f" but is {entry[2]} in {name1}")
                      for entry in conflict_1_2_account]
 
             else:
